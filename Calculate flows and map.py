@@ -135,7 +135,7 @@ def calculate_total_cost(df, df_costperflow):
     print("Total cost: ", np.round(total_cost),"€")
     
     # Save the results to an Excel file
-    df.to_excel("/Users/guislainegall/Downloads/MinCostFlowResults.xlsx", index=False)
+    df.to_excel("https://github.com/Guislaine/CorreosExpress/raw/main/MinCostFlowResults.xlsx", index=False)
     
     return df
         
@@ -153,7 +153,7 @@ def create_map(df):
     
     # Add cities as nodes with their geographical coordinates
     # Read the Excel file
-    df_del = pd.read_excel("/Users/guislainegall/Downloads/delegacion.xlsx")
+    df_del = pd.read_excel("https://github.com/Guislaine/CorreosExpress/raw/main/delegacion.xlsx")
     df_del['latitud'] = df_del['latitud'].str.replace(',', '.').astype(float)
     df_del['longitud'] = df_del['longitud'].str.replace(',', '.').astype(float)
     
@@ -174,7 +174,7 @@ def create_map(df):
     
     # Add directed edges to connect cities with the "flow" and "color" attributes
     # Read the Excel file
-    # df = pd.read_excel("/Users/guislainegall/Downloads/edge.xlsx")
+    # df = pd.read_excel("https://github.com/Guislaine/CorreosExpress/raw/main/edge.xlsx")
     
     # Create a dictionary to map color names to actual colors
     color_mapping = {
