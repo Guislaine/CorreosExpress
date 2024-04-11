@@ -105,17 +105,22 @@ def calculate_flows(df, value):
     
     solution_flows = smcf.flows(all_arcs)
     costs = solution_flows * unit_costs
-    results_dfs = []
-    for arc, flow, cost in zip(all_arcs, solution_flows, costs):
-        start_del = smcf.tail(arc)
-        end_del = smcf.head(arc)
-        results_dfs.append(pd.DataFrame({"start_del": [start_del], "end_del": [end_del], "flow_opt": [flow], "costs": [cost]}))
-
-    results_df = pd.concat(results_dfs, ignore_index=True)
- 
+    #results_dfs = []
     #for arc, flow, cost in zip(all_arcs, solution_flows, costs):
         #start_del = smcf.tail(arc)
         #end_del = smcf.head(arc)
+        #results_dfs.append(pd.DataFrame({"start_del": [start_del], "end_del": [end_del], "flow_opt": [flow], "costs": [cost]}))
+
+    #results_df = pd.concat(results_dfs, ignore_index=True)
+ 
+    for arc, flow, cost in zip(all_arcs, solution_flows, costs):
+        start_del = smcf.tail(arc)
+        end_del = smcf.head(arc)
+        # Créer une liste de dictionnaires contenant les nouvelles données
+        new_data = [{"start_del": start_del, "end_del": end_del, "flow_opt": flow, "costs": cost}]
+
+        # Concaténer les nouvelles données avec le DataFrame existant
+        results_df = pd.concat([results_df, pd.DataFrame(new_data)], ignore_index=True)
         #results_df = results_df.append({"start_del": start_del, "end_del": end_del, "flow_opt": flow, "costs": cost}, ignore_index=True)
     
     df['flow_opt'] += results_df['flow_opt']
