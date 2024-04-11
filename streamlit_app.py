@@ -1,13 +1,22 @@
 import streamlit as st
 import subprocess
+import traceback
 
-# Titre de l'application
-st.title("Interface pour Calculate flows and map")
+def run_script():
+    try:
+        subprocess.run(["python", "Calculate_flows_and_map.py"])
+        st.success("Le script a été exécuté avec succès!")
+    except Exception as e:
+        st.error(f"Une erreur s'est produite: {e}")
+        st.exception(traceback.format_exc())
 
-# Bouton pour lancer l'exécution du script
-if st.button("Lancer l'exécution du script"):
-    # Exécution du script
-    subprocess.run(["python", "Calculate_flows_and_map.py"])
-    # Message de confirmation
-    st.write("L'exécution du script est terminée !")
+def main():
+    st.title("Application pour exécuter le script 'Calculate flows and map'")
+    st.write("Cette application permet d'exécuter le script 'Calculate flows and map'.")
 
+    # Bouton pour exécuter le script
+    if st.button("Exécuter le script"):
+        run_script()
+
+if __name__ == "__main__":
+    main()
