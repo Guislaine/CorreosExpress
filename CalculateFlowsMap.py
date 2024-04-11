@@ -143,7 +143,7 @@ def calculate_total_cost(df, df_costperflow):
     print("Total cost: ", np.round(total_cost),"€")
     
     # Save the results to an Excel file
-    display(df)
+    #display(df)
     #df.to_excel("https://github.com/Guislaine/CorreosExpress/raw/main/MinCostFlowResults.xlsx", index=False)
     
     return df
