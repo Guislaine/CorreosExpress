@@ -27,7 +27,7 @@ def import_data():
 #    list_del = ['MADRID CTC']
     
     # Copier dans df les données de nombre de camion et de cout du fichier cost per flow 
-    df_costperflow = pd.read_excel('/Users/guislainegall/Downloads/cost per flow.xlsx')
+    df_costperflow = pd.read_excel('https://github.com/Guislaine/CorreosExpress/raw/main/cost%20per%20flow.xlsx')
     
     
     return df, start_nodes, end_nodes, capacities, unit_costs, list_del, df_costperflow
