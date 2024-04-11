@@ -6,7 +6,7 @@ def import_data():
     import pandas as pd
      
     # Load excel file in DataFrame
-    df = pd.read_excel('/Users/guislainegall/Downloads/NetworkCEX.xlsx')
+    df = pd.read_excel('')
     df_start_nodes = df['start_nodes'].tolist()
     df_end_nodes = df['end_nodes'].tolist()
     df_capacities = df['capacities'].tolist()
