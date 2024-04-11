@@ -4,6 +4,14 @@ def import_data():
  
     import numpy as np
     import pandas as pd
+
+    # Définir une fonction alternative à append
+    def _append(self, other, ignore_index=False, verify_integrity=False, sort=False):
+        # Ajouter les lignes de other à self
+        return pd.concat([self, other], ignore_index=ignore_index, verify_integrity=verify_integrity, sort=sort)
+     
+    # Remplacer la méthode append de DataFrame par la fonction alternative
+    pd.DataFrame.append = _append
      
     # Load excel file in DataFrame
     df = pd.read_excel('https://github.com/Guislaine/CorreosExpress/raw/main/NetworkCEX.xlsx')
