@@ -1,5 +1,4 @@
-"""Minimum cost flow supply/demand et carte 
-    Ce code est le main code utilisé pour calculer le flux optimal """
+"""Minimum cost flow supply/demand et carte """
 
 def import_data():
  
@@ -130,31 +129,6 @@ def calculate_total_cost(df, df_costperflow):
         df.loc[index_df, 'arc_cost_km'] = df_costperflow.loc[index_df_costperflow, 'arc_cost_km']
         df.loc[index_df, 'color'] = df_costperflow.loc[index_df_costperflow, 'color']
         df.loc[index_df, 'arc_cost'] = df.loc[index_df, 'arc_cost_km'] * df.loc[index_df, 'distancia'] 
-        
-    # Inclure des fourgonettes pour diminuer la durée des routes
-    for index_df in range(len(df)):
-        if df.loc[index_df, 'speed_road'] == 1 :
-            df.loc[index_df, 'nb_furgon'] = np.ceil(df.loc[index_df, 'flow_opt'] / 550)
-            df.loc[index_df,'nb_carrozado'] = 0
-            df.loc[index_df, 'nb_rigido'] = 0
-            df.loc[index_df, 'nb_trailer'] = 0
-            df.loc[index_df, 'nb_vehicule'] = df.loc[index_df, 'nb_furgon']
-            if df.loc[index_df, 'flow_opt'] < 275:
-                df.loc[index_df, 'color'] = 'red'
-            else:
-                df.loc[index_df, 'color'] = 'orange'
-            df.loc[index_df, 'arc_cost'] = df.loc[index_df, 'distancia'] * 0.4 * df.loc[index_df, 'nb_furgon']
-        
-    # Calculer le nombre de vehicules
-    df['nb_vehicule'] = df['nb_furgon'] + df['nb_carrozado'] + df['nb_rigido'] + df['nb_trailer']
-
-    # Inclure des couts fixes pour les routes < 100 km
-    for index_df in range(len(df)):
-        if df.loc[index_df, 'distancia'] < 100:
-            if df.loc[index_df, 'color'] == 'green' or df.loc[index_df, 'color'] == 'yellow':
-                df.loc[index_df, 'arc_cost'] = df.loc[index_df, 'nb_vehicule'] * (100 + 0.5 * df.loc[index_df, 'distancia'])
-            else:
-                df.loc[index_df, 'arc_cost'] = df.loc[index_df, 'nb_vehicule'] * (60 + 0.2 * df.loc[index_df, 'distancia'])
         
     # Calculer le cout total
     total_cost = df['arc_cost'].sum()
